@@ -1,49 +1,44 @@
 package data.structure.impl;
 
-import data.structure.api.IQueue;
+import data.structure.api.IStack;
 import data.structure.node.Node;
 
-public class Queue<E> implements IQueue<E> {
+public class Stack <E> implements IStack<E> {
+
     private Node<E> first;
     private Node<E> last;
-    int size;
-
-    public Queue() {
-        this.first = null;
-        this.last = null;
-        this.size = 0;
-    }
+    public int size;
 
     @Override
-    public int enqueue(E e) {
+    public int push(E e) {
         Node<E> newNode = new Node(e);
 
         if(this.size == 0) {
             this.first = newNode;
             this.last = newNode;
         } else {
-            this.last.next = newNode;
-            this.last = newNode;
+            newNode.next = this.first;
+            this.first = newNode;
         }
-
         this.size++;
         return this.size;
     }
 
     @Override
-    public E dequeue() {
+    public E pop() {
         if(this.size == 0) return null;
 
-        Node<E> dequeueNode = this.first;
+        Node<E> popNode = this.first;
         if(this.size == 1) {
             this.first = null;
             this.last = null;
         } else {
             this.first = this.first.next;
         }
-        dequeueNode.next = null;
+
+        popNode.next = null;
         this.size--;
-        return dequeueNode.val;
+        return popNode.val;
     }
 
     public void print() {
@@ -51,13 +46,13 @@ public class Queue<E> implements IQueue<E> {
             System.out.println("empty");
             return;
         }
-
-        Node tmp = this.first;
         StringBuilder sb = new StringBuilder();
-        while(tmp != null) {
-            sb.append(tmp.val + " ");
-            tmp = tmp.next;
+        var cur = this.first;
+        while (cur != null) {
+            sb.append(cur.val + " ");
+            cur = cur.next;
         }
+
         System.out.println("size = " + this.size + " | " + sb);
     }
 }
