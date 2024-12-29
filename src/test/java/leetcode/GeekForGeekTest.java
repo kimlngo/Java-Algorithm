@@ -204,6 +204,19 @@ public class GeekForGeekTest {
 
         return arr1 + " " + arr2;
     }
+
+    @Test
+    public void testFindNthSmallestNumber() {
+        int[] arr = new int[]{7, 10, 4, 3, 20, 15};
+        Assertions.assertEquals(7, findNthSmallestNumber(arr, 3));
+        Assertions.assertEquals(10, findNthSmallestNumber(arr, 4));
+    }
+
+    private int findNthSmallestNumber(int[] input, int k) {
+        return Arrays.stream(input)
+                     .sorted()
+                     .toArray()[k - 1];
+    }
 }
 
 record TrainTime(int hour, int min) {
