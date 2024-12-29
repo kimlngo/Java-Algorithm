@@ -3,9 +3,7 @@ package leetcode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class GeekForGeekTest {
@@ -89,4 +87,33 @@ public class GeekForGeekTest {
         }
         return -1;
     }
+
+    @Test
+    public void testFindArrayLeaders() {
+        int[] arr = {1, 2, 3, 4, 5, 2};
+        System.out.println("Array leaders in " + Arrays.toString(arr) + " is: " + Arrays.toString(findArrayLeaders(arr)));
+    }
+
+    private int[] findArrayLeaders(int[] input) {
+        if (input.length <= 1) return input;
+
+        List<Integer> result = new ArrayList<>();
+
+        for (int i = 0; i < input.length - 1; i++) {
+            if (isGreaterOrEqualToAll(input[i], Arrays.stream(input, i + 1, input.length)
+                                                      .toArray())) {
+                result.add(input[i]);
+            }
+        }
+        result.add(input[input.length - 1]);
+        return result.stream()
+                     .mapToInt(Integer::intValue)
+                     .toArray();
+    }
+
+    private boolean isGreaterOrEqualToAll(int k, int[] arr) {
+        return Arrays.stream(arr)
+                     .allMatch(i -> k >= i);
+    }
+
 }
