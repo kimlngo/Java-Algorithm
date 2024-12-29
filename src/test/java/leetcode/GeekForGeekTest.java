@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class GeekForGeekTest {
@@ -122,8 +123,8 @@ public class GeekForGeekTest {
         String[] departure = {"9:10", "12:00", "11:20", "11:30", "19:00", "20:00" };
         Assertions.assertEquals(3, findMinNumPlatforms(arrival, departure));
 
-        String[] arrival2 = {"9:00", "9:40"};
-        String[] departure2 = {"9:10", "12:00"};
+        String[] arrival2 = {"9:00", "9:40" };
+        String[] departure2 = {"9:10", "12:00" };
         Assertions.assertEquals(1, findMinNumPlatforms(arrival2, departure2));
     }
 
@@ -153,7 +154,7 @@ public class GeekForGeekTest {
                 j++;
             }
 
-            if(minPlatformCount < count) {
+            if (minPlatformCount < count) {
                 minPlatformCount = count;
             }
         }
@@ -172,8 +173,36 @@ public class GeekForGeekTest {
      * if a < b -> a - b
      */
     private int compareTime(TrainTime t1, TrainTime t2) {
-        if(t1.hour() != t2.hour()) return t1.hour() - t2.hour();
+        if (t1.hour() != t2.hour()) return t1.hour() - t2.hour();
         else return t1.min() - t2.min();
+    }
+
+    @Test
+    public void testRightRotateArray() {
+        int[] arr = new int[]{1, 3, 5, 7, 9};
+        Assertions.assertEquals("7 9 1 3 5", rightRotateArray(arr, 2));
+
+        int[] arr2 = new int[]{1, 2, 3, 4, 5};
+        Assertions.assertEquals("2 3 4 5 1", rightRotateArray(arr2, 4));
+    }
+
+    //assume 0 <= k <= length
+    private String rightRotateArray(int[] arr, int k) {
+        int length = arr.length;
+
+        int startIndex = length - k;
+        //loop-1
+
+        String arr1 = Arrays.stream(arr, startIndex, length)
+                            .mapToObj(String::valueOf)
+                            .collect(Collectors.joining(" "));
+
+        //loop-2
+        String arr2 = Arrays.stream(arr, 0, startIndex)
+                            .mapToObj(String::valueOf)
+                            .collect(Collectors.joining(" "));
+
+        return arr1 + " " + arr2;
     }
 }
 
