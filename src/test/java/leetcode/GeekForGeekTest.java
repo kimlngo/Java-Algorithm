@@ -172,14 +172,8 @@ public class GeekForGeekTest {
      * if a < b -> a - b
      */
     private int compareTime(TrainTime t1, TrainTime t2) {
-        if (t1.hour() < t2.hour()) return -1; //no swap
-        else if (t1.hour() > t2.hour()) return 1; //swap
-        else {
-            //t1.hour() == t2.hour()
-            if (t1.min() < t2.min()) return -1;
-            else if (t1.min() > t2.min()) return 1;
-            else return -1;
-        }
+        if(t1.hour() != t2.hour()) return t1.hour() - t2.hour();
+        else return t1.min() - t2.min();
     }
 }
 
