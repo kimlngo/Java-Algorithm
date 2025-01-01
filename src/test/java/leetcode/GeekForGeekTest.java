@@ -119,12 +119,12 @@ public class GeekForGeekTest {
 
     @Test
     public void testFindMinNumPlatforms() {
-        String[] arrival = {"9:00", "9:40", "9:50", "11:00", "15:00", "18:00" };
-        String[] departure = {"9:10", "12:00", "11:20", "11:30", "19:00", "20:00" };
+        String[] arrival = {"9:00", "9:40", "9:50", "11:00", "15:00", "18:00"};
+        String[] departure = {"9:10", "12:00", "11:20", "11:30", "19:00", "20:00"};
         Assertions.assertEquals(3, findMinNumPlatforms(arrival, departure));
 
-        String[] arrival2 = {"9:00", "9:40" };
-        String[] departure2 = {"9:10", "12:00" };
+        String[] arrival2 = {"9:00", "9:40"};
+        String[] departure2 = {"9:10", "12:00"};
         Assertions.assertEquals(1, findMinNumPlatforms(arrival2, departure2));
     }
 
@@ -216,6 +216,68 @@ public class GeekForGeekTest {
         return Arrays.stream(input)
                      .sorted()
                      .toArray()[k - 1];
+    }
+
+    @Test
+    public void testFindMaxLengthBitonic() {
+        int[] input1 = {20, 4, 1, 2, 3, 4, 2, 10};
+        int[] input2 = {12, 4, 78, 90, 45, 23};
+        int[] input3 = {40, 30, 20, 10};
+        int[] input4 = {10, 20, 30, 40};
+        int[] input5 = {10, 20};
+        int[] input6 = {30, 20};
+        System.out.println("Max Bitonic Length 1 = " + findMaxLengthBitonic(input1));
+        System.out.println("Max Bitonic Length 2 = " + findMaxLengthBitonic(input2));
+        System.out.println("Max Bitonic Length 3 = " + findMaxLengthBitonic(input3));
+        System.out.println("Max Bitonic Length 4 = " + findMaxLengthBitonic(input4));
+        System.out.println("Max Bitonic Length 5 = " + findMaxLengthBitonic(input5));
+        System.out.println("Max Bitonic Length 6 = " + findMaxLengthBitonic(input6));
+    }
+
+    private int findMaxLengthBitonic(int[] arr) {
+        if (arr.length <= 2) return arr.length;
+
+        int startIndex = -1;
+        int peak = -1;
+        int endIndex = -1;
+
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (startIndex == -1) {
+                if (arr[i] > arr[i + 1]) continue;
+                else startIndex = i;
+            } else {
+                if(i != arr.length - 2) {
+                    if (arr[i] <= arr[i + 1]) continue;
+                    else {
+                        peak = i;
+                        break;
+                    }
+                } else {
+                    if (arr[i] <= arr[i + 1]) return arr.length - startIndex;
+                    else return arr.length - startIndex - 1;
+                }
+            }
+        }
+        if(peak == -1 && startIndex == -1) {
+            peak = 0;
+            startIndex = 0;
+        }
+        for (int j = peak; j < arr.length - 1; j++) {
+            if (j != arr.length - 2) {
+                if (arr[j] >= arr[j + 1]) continue;
+                else {
+                    endIndex = j;
+                    break;
+                }
+            } else {
+                if (arr[j] >= arr[j + 1]) endIndex = j + 1;
+                else endIndex = j;
+
+                break;
+            }
+        }
+
+        return endIndex - startIndex + 1;
     }
 }
 
