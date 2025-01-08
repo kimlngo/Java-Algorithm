@@ -39,6 +39,34 @@ public class BinarySearchTree {
         }
     }
 
+    public boolean contains(int val) {
+        if (this.root == null) {
+            return false;
+        }
+
+        var cur = this.root;
+        while (cur != null) {
+            if(val == cur.getValue()) return true;
+            else if(val < cur.getValue()) cur = cur.left;
+            else cur = cur.right;
+        }
+        return false;
+    }
+
+    public Node find(int val) {
+        if (this.root == null) {
+            return null;
+        }
+
+        var cur = this.root;
+        while (cur != null) {
+            if(val == cur.getValue()) return cur;
+            else if(val < cur.getValue()) cur = cur.left;
+            else cur = cur.right;
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "BinarySearchTree{" +
