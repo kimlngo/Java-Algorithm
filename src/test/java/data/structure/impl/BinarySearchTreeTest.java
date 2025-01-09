@@ -2,14 +2,29 @@ package data.structure.impl;
 
 import data.structure.api.tree.BinarySearchTree;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BinarySearchTreeTest {
 
+    private BinarySearchTree bst;
+
+    @BeforeEach
+    void setupBST() {
+        bst = new BinarySearchTree();
+
+        bst.insert(10);
+        bst.insert(5);
+        bst.insert(13);
+
+        bst.insert(2);
+        bst.insert(7);
+        bst.insert(11);
+        bst.insert(16);
+    }
+
     @Test
     public void testInsertToBST() {
-        BinarySearchTree bst = new BinarySearchTree();
-
         bst.insert(10);
         bst.insert(5);
         bst.insert(13);
@@ -43,5 +58,10 @@ public class BinarySearchTreeTest {
         Assertions.assertEquals(7, node.getValue());
 
         Assertions.assertNull(bst.find(15));
+    }
+
+    @Test
+    public void testBreathFirstSearch() {
+        Assertions.assertEquals("[10, 5, 13, 2, 7, 11, 16]", bst.breathFirstSearch());
     }
 }
