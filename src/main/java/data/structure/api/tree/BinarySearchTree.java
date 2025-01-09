@@ -2,6 +2,7 @@ package data.structure.api.tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 public class BinarySearchTree {
@@ -91,6 +92,44 @@ public class BinarySearchTree {
         }
 
         return "[" + String.join(", ", visited) + "]";
+    }
+
+    public String depthFirstSearch_PreOrder() {
+        return this.depthFirstSearch(this::traversePreOrder);
+    }
+
+    public String depthFirstSearch_PostOrder() {
+        return this.depthFirstSearch(this::traversePostOrder);
+    }
+
+    public String depthFirstSearch_InOrder() {
+        return this.depthFirstSearch(this::traverseInOrder);
+    }
+
+    private String depthFirstSearch(BiConsumer<Node, List<String>> traversePattern) {
+        if(this.root == null) return "";
+
+        List<String> visited = new ArrayList<>();
+        traversePattern.accept(this.root, visited);
+        return String.format("[%s]", String.join(", ", visited));
+    }
+
+    private void traversePreOrder(Node node, List<String> visited) {
+        visited.add(String.valueOf(node.getValue()));
+        if(node.left != null) traversePreOrder(node.left, visited);
+        if(node.right != null) traversePreOrder(node.right, visited);
+    }
+
+    private void traverseInOrder(Node node, List<String> visited) {
+        if(node.left != null) traverseInOrder(node.left, visited);
+        visited.add(String.valueOf(node.getValue()));
+        if(node.right != null) traverseInOrder(node.right, visited);
+    }
+
+    private void traversePostOrder(Node node, List<String> visited) {
+        if(node.left != null) traversePostOrder(node.left, visited);
+        if(node.right != null) traversePostOrder(node.right, visited);
+        visited.add(String.valueOf(node.getValue()));
     }
 
     @Override

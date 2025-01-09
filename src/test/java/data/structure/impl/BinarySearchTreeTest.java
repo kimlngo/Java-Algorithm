@@ -64,4 +64,19 @@ public class BinarySearchTreeTest {
     public void testBreathFirstSearch() {
         Assertions.assertEquals("[10, 5, 13, 2, 7, 11, 16]", bst.breathFirstSearch());
     }
+
+    @Test
+    public void testDepthFirstSearch_PreOrder() {
+        Assertions.assertEquals("[10, 5, 2, 7, 13, 11, 16]", bst.depthFirstSearch_PreOrder());
+    }
+
+    @Test
+    public void testDepthFirstSearch_PostOrder() {
+        Assertions.assertEquals("[2, 7, 5, 11, 16, 13, 10]", bst.depthFirstSearch_PostOrder());
+    }
+
+    @Test
+    public void testDepthFirstSearch_InOrder() {
+        Assertions.assertEquals("[2, 5, 7, 10, 11, 13, 16]", bst.depthFirstSearch_InOrder());
+    }
 }
