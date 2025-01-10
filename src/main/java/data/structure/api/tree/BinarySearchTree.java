@@ -106,6 +106,10 @@ public class BinarySearchTree {
         return this.depthFirstSearch(this::traverseInOrder);
     }
 
+    public String depthFirstSearch_InReverseOrder() {
+        return this.depthFirstSearch(this::traverseInReverseOrder);
+    }
+
     private String depthFirstSearch(BiConsumer<Node, List<String>> traversePattern) {
         if(this.root == null) return "";
 
@@ -124,6 +128,12 @@ public class BinarySearchTree {
         if(node.left != null) traverseInOrder(node.left, visited);
         visited.add(String.valueOf(node.getValue()));
         if(node.right != null) traverseInOrder(node.right, visited);
+    }
+
+    private void traverseInReverseOrder(Node node, List<String> visited) {
+        if(node.right != null) traverseInReverseOrder(node.right, visited);
+        visited.add(String.valueOf(node.getValue()));
+        if(node.left != null) traverseInReverseOrder(node.left, visited);
     }
 
     private void traversePostOrder(Node node, List<String> visited) {

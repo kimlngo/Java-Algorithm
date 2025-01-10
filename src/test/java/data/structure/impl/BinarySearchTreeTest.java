@@ -79,4 +79,9 @@ public class BinarySearchTreeTest {
     public void testDepthFirstSearch_InOrder() {
         Assertions.assertEquals("[2, 5, 7, 10, 11, 13, 16]", bst.depthFirstSearch_InOrder());
     }
+
+    @Test
+    public void testDepthFirstSearch_InReverseOrder() {
+        Assertions.assertEquals("[16, 13, 11, 10, 7, 5, 2]", bst.depthFirstSearch_InReverseOrder());
+    }
 }
