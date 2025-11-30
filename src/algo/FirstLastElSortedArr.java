@@ -1,8 +1,6 @@
 package algo;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /*
 Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
@@ -42,19 +40,13 @@ public class FirstLastElSortedArr {
     }
 
     private static int[] searchRange(int[] nums, int target) {
-        List<Integer> indices = new ArrayList<>();
-
         if (nums.length == 0)
             return NOT_FOUND;
         else if (nums.length == 1) {
             return nums[0] == target ? new int[]{0, 0} : NOT_FOUND;
-        } else if (nums.length == 2) {
-            if (nums[0] == target) indices.add(0);
-            if (nums[1] == target) indices.add(1);
-            return getIndexes(indices);
         }
 
-        //nums has 3 or more items
+        //nums has 2 or more items
         int findFirst = binarySearchNumber(nums, target);
         if (findFirst == -1)
             return NOT_FOUND;
@@ -80,16 +72,6 @@ public class FirstLastElSortedArr {
         }
 
         return new int[]{leftIdx, rightIdx};
-    }
-
-    private static int[] getIndexes(List<Integer> indices) {
-        if (indices.isEmpty())
-            return NOT_FOUND;
-        else if (indices.size() == 1) {
-            return new int[]{indices.getFirst(), indices.getFirst()};
-        } else {
-            return new int[]{indices.getFirst(), indices.getLast()};
-        }
     }
 
     private static int binarySearchNumber(int[] arr, int target) {
