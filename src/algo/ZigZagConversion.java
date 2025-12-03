@@ -42,7 +42,7 @@ public class ZigZagConversion {
     }
 
     private String convert(String s, int numRows) {
-        if (numRows == 1)
+        if (numRows == 1 || numRows > s.length())
             return s;
         List<List<Character>> result = new ArrayList<>();
 
