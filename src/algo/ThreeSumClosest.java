@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class ThreeSumClosest {
     public static void main(String[] args) {
-        var nums = new int[]{-1, 2, 1, -4};
-//        var nums = new int[]{-49, -30, -20, -4, 0, 7, 10, 21, 50};
+//        var nums = new int[]{-1, 2, 1, -4};
+        var nums = new int[]{-49, -30, -20, -4, 0, 7, 10, 21, 50};
         System.out.println(threeSumClosest_2(nums, 1));
 
     }
