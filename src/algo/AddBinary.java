@@ -46,23 +46,20 @@ public class AddBinary {
         }
 
         if (a.length() == b.length()) {
-            if (carryOver.equals("1")) {
+            if ("1".equals(carryOver)) {
                 sb.append(carryOver);
             }
-
-            return sb.reverse()
-                     .toString();
         } else {
             String longerStr = aReverse.length() > bReverse.length() ? aReverse : bReverse;
             String remainingStr = longerStr.substring(i);
-            if (carryOver.equals("0")) {
+            if ("0".equals(carryOver)) {
                 sb.append(remainingStr);
             } else {
                 sb.append(reverseString(addBinary(carryOver, reverseString(remainingStr))));
             }
-            return sb.reverse()
-                     .toString();
         }
+        return sb.reverse()
+                 .toString();
     }
 
     private static String reverseString(String input) {
