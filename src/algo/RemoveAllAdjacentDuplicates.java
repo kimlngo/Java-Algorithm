@@ -3,7 +3,9 @@ package algo;
 import util.ReadText;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class RemoveAllAdjacentDuplicates {
     public static void main(String[] args) throws IOException {
@@ -12,6 +14,9 @@ public class RemoveAllAdjacentDuplicates {
 
         System.out.println("Done");
 
+        System.out.println(removeAdjDuplicates_Stack("abbaca"));
+        System.out.println(removeAdjDuplicates_Stack("azxxzy"));
+        System.out.println(removeAdjDuplicates_Stack("aaaaaaaaa"));
     }
 
     private static String removeDuplicates(String s) {
@@ -56,29 +61,27 @@ public class RemoveAllAdjacentDuplicates {
     private static String removeAdjDuplicates_Stack(String s) {
         if (s.length() == 1) return s;
 
+        List<Character> charList = s.chars()
+                                    .mapToObj(a -> (char) a)
+                                    .toList();
+
         Stack<Character> stack = new Stack<>();
         stack.push(s.charAt(0));
 
-        for (int i = 1; i < s.length(); i++) {
+        for (int i = 1; i < charList.size(); i++) {
+            Character c = charList.get(i);
             if (stack.isEmpty()) {
-                stack.push(s.charAt(i));
+                stack.push(c);
                 continue;
             }
 
-            var peek = stack.peek();
-
-            if (peek.equals(s.charAt(i)))
+            if (stack.peek().equals(c))
                 stack.pop();
             else
-                stack.push(s.charAt(i));
+                stack.push(c);
         }
-
-        StringBuilder sb = new StringBuilder();
-        while (!stack.isEmpty()) {
-            sb.append(stack.pop());
-        }
-
-        return sb.reverse()
-                 .toString();
+        return stack.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(""));
     }
 }
