@@ -22,7 +22,7 @@ public class MeetingRoomsII {
         //2) sort meeting based on "from" then "to"
         List<Meeting> meetings = convertAndSortMeeting(intervals);
         int[] iterationPoints = meetings.stream()
-                                        .map(m -> Arrays.asList(m.from(), m.to()))
+                                        .map(m -> List.of(m.from(), m.to()))
                                         .flatMap(List::stream)
                                         .mapToInt(Integer::intValue)
                                         .distinct()
