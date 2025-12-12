@@ -10,8 +10,6 @@ import java.util.List;
 public class MergeKSortedLists {
 
     public static void main(String[] args) {
-        ListNode node = new ListNode();
-
         ListNode list1 = createLinkedListFromArray(new int[]{1, 4, 5});
         ListNode list2 = createLinkedListFromArray(new int[]{1, 3, 4});
         ListNode list3 = createLinkedListFromArray(new int[]{2, 6});
