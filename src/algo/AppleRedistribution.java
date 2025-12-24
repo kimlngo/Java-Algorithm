@@ -1,8 +1,6 @@
 package algo;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * You are given an array apple of size n and an array capacity of size m.
