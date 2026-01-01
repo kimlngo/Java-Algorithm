@@ -36,9 +36,9 @@ import java.util.stream.Collectors;
  * <p>
  * Constraints:
  * <p>
- * 1 <= nums.length <= 104
- * -107 <= nums[i] <= 107
- * 0 <= k <= 107
+ * 1 <= nums.length <= 10^4
+ * -10^7 <= nums[i] <= 10^7
+ * 0 <= k <= 10^7
  */
 
 public class KDiffPairs {
@@ -90,7 +90,7 @@ public class KDiffPairs {
                     count++;
             }
 
-            //3) return n / 2 because we are counting double: (a,b) and (b,a)
+            //3) return n / 2 because we are counting them twice: (a,b) and (b,a)
             return count / 2;
         }
     }
